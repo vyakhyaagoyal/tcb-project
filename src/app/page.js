@@ -1,7 +1,7 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div></div>
+    <div className="bg-black text-white p-8 m-5 text-xl">
+      Welcome to Next.js!
+    </div>
   );
 }
