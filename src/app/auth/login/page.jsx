@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 export default function LoginPage() {
     const supabase = createClient();
@@ -11,6 +14,7 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -37,10 +41,10 @@ export default function LoginPage() {
     return (
         <div className="flex h-screen">
             <div className="w-1/2 relative">
-                <Image src="/bg_auth.jpeg" alt="background auth" height={1000} width={1000} className="h-full"></Image>
+                <Image src="/bg_auth.jpeg" alt="background auth" loading="eager" sizes="50vw" fill priority className="object-cover"></Image>
             </div>
 
-            <div className="w-1/2 flex flex-col items-center justify-center p-10 bg-linear-to-b from-[#c7b6a3] via-[#d2c2b1] to-[#ddcfbf]">
+            <div className="relative w-1/2 flex flex-col items-center justify-center p-10 bg-linear-to-b from-[#c7b6a3] via-[#d2c2b1] to-[#ddcfbf]">
                 <form onSubmit={onSubmit} className="m-5 p-8">
                     <h1 className="text-6xl mb-8">Login</h1>
 
@@ -48,9 +52,16 @@ export default function LoginPage() {
                     <input type="email" name="email" autoComplete="email" required placeholder="Enter email" className="border p-2 w-full rounded-xl mb-6 mt-2" onChange={onChange} value={email}></input>
 
                     <label className="mb-4">Password</label>
-                    <input type="password" name="password" autoComplete="current-password" required placeholder="Enter password" className="border p-2 w-full rounded-xl mb-6 mt-2" onChange={onChange} value={password}></input>
 
-                    <button type="submit" className="bg-gray-900 text-white p-3 text-xl rounded-2xl w-full cursor-pointer hover:scale-102 duration-300 transition-transform hover:bg-gray-800">Login</button>
+                    <input type={showPassword ? "text" : "password"} name="password" autoComplete="current-password" required placeholder="Enter password" className="border p-2 w-full rounded-xl mb-6 mt-2" onChange={onChange} value={password}></input>
+                    {!showPassword &&
+                        <FontAwesomeIcon icon={faEye} onClick={() => setShowPassword(!showPassword)} className="absolute right-29 top-107 text-gray-900 cursor-pointer" />
+                    }
+                    {showPassword &&
+                        <FontAwesomeIcon icon={faEyeSlash} onClick={() => setShowPassword(!showPassword)} className="absolute right-29 top-107 text-gray-900 cursor-pointer" />
+                    }
+
+                    <button type="submit" className="bg-blue-900 text-white p-3 text-xl rounded-2xl w-full cursor-pointer hover:scale-102 duration-300 transition-transform hover:bg-blue-800">Login</button>
                 </form>
             </div>
 
