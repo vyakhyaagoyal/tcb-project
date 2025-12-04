@@ -45,7 +45,7 @@ export default function LoginPage() {
             </div>
 
             <div className="relative w-1/2 flex flex-col items-center justify-center p-10 bg-linear-to-b from-[#c7b6a3] via-[#d2c2b1] to-[#ddcfbf]">
-                <form onSubmit={onSubmit} className="m-5 p-8">
+                <form onSubmit={onSubmit} className="m-5 p-8 bg-gray-200 rounded-2xl shadow-lg">
                     <h1 className="text-6xl mb-8">Login</h1>
 
                     <label className="mb-4">Email</label>

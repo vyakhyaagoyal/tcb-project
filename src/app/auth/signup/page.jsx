@@ -57,7 +57,7 @@ export default function SignupPage() {
             </div>
 
             <div className="w-1/2 flex flex-col items-center justify-center p-10 bg-linear-to-b from-[#c7b6a3] via-[#d2c2b1] to-[#ddcfbf]">
-                <form onSubmit={onSubmit} className="m-5 p-8">
+                <form onSubmit={onSubmit} className="m-5 p-8 bg-gray-200 rounded-2xl shadow-lg">
 
                     <h1 className="text-6xl mb-3 items-center justify-center">Sign  Up</h1>
                     <p className="mb-8 text-xl">Already a member? <Link href="/auth/login" className="text-blue-800  cursor-pointer">Login</Link></p>
