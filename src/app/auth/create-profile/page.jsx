@@ -98,7 +98,6 @@ export default function CreateProfilePage() {
                 <button className="mx-auto px-5 py-3 bg-linear-to-r from-pink-600 to-purple-600 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition mb-5 hover:cursor-pointer">Save Profile</button>
 
             </div>
-
         </div>
     )
 }
