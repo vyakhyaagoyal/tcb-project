@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react'
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-regular-svg-icons';
-import ElasticSlider from '@/components/ElaticSlider';
+import ElasticSlider from '@/components/ElasticSlider';
 
 export default function CreateProfilePage() {
     const [image, setImage] = useState(null);
@@ -15,6 +15,12 @@ export default function CreateProfilePage() {
         if (file) {
             setImage(URL.createObjectURL(file));
         }
+    }
+
+    const clickSaveButton=(e)=>{
+        e.preventDefault();
+
+
     }
 
     const fortes = ["Development", "Cooking", "Gaming", "Art", "Fashion", "Dancing", "Singing", "Writing", "Photography", "Traveling", "Fitness", "Music", "Sports", "Designing", "Influencer", "Movies", "Theatre", "Blogging"];
@@ -44,7 +50,7 @@ export default function CreateProfilePage() {
             </div>
 
             <div className="flex flex-col">
-                <div className='w-[80%] mx-auto items-center h-0.5 bg-linear-to-r from-pink-600 to-purple-600 border-solid'></div>
+                
                 <div className='flex backdrop-blur-xl bg-white/80 rounded-2xl m-5 p-1 shadow-xl'>
 
                     <div className='m-6 w-[50vw] relative'>
@@ -63,9 +69,9 @@ export default function CreateProfilePage() {
                         <label className='text-sm mb-5'>Give yourself a rating based on your aura points. Your vibe score. No pressure</label>
 
                         <ElasticSlider
-                            leftIcon={<>+</>}
-                            rightIcon={<>-</>}
-                            startingValue={50}
+                            leftIcon={<>-</>}
+                            rightIcon={<>+</>}
+                            startingValue={0}
                             defaultValue={0}
                             maxValue={100}
                             isStepped
@@ -95,9 +101,13 @@ export default function CreateProfilePage() {
                     </div>
                 </div>
 
-                <button className="mx-auto px-5 py-3 bg-linear-to-r from-pink-600 to-purple-600 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition mb-5 hover:cursor-pointer">Save Profile</button>
+                <button className="mx-auto px-5 py-3 bg-linear-to-r from-pink-600 to-purple-600 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition mb-5 hover:cursor-pointer"
+                onClick={clickSaveButton}
+                >Save Profile</button>
 
             </div>
         </div>
     )
 }
+
+
