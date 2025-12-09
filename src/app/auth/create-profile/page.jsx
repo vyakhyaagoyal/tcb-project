@@ -57,6 +57,7 @@ export default function CreateProfilePage() {
             if(upsertError){
                 throw upsertError;
             }
+            // console.log('Saving profile, aura state =', aura);
             setIsSaving(false);
             alert("profile saved");
 
@@ -115,13 +116,13 @@ export default function CreateProfilePage() {
                         <ElasticSlider
                             leftIcon={<>-</>}
                             rightIcon={<>+</>}
-                            startingValue={0}
-                            defaultValue={0}
+                            // startingValue={0}
+                            // defaultValue={aura}
                             maxValue={100}
                             isStepped
                             stepSize={1}
                             className='mt-3'
-                            onValueChange={(val) => setAura(val)}
+                            onChange={(v) => setAura(Number(v))}
                             value={aura}
                         />
 

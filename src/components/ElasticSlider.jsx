@@ -1,4 +1,5 @@
 "use client"
+
 import { animate, motion, useMotionValue, useMotionValueEvent, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
@@ -12,7 +13,10 @@ export default function ElasticSlider({
     isStepped = false,
     stepSize = 1,
     leftIcon = <>-</>,
-    rightIcon = <>+</>
+    rightIcon = <>+</>,
+    // NEW props:
+    value: controlledValue,
+    onChange // callback -> onChange(newValue)
 }) {
     return (
         <div className={`flex flex-col items-center justify-center gap-4 w-48 ${className}`}>
@@ -24,18 +28,28 @@ export default function ElasticSlider({
                 stepSize={stepSize}
                 leftIcon={leftIcon}
                 rightIcon={rightIcon}
+                value={controlledValue}
+                onChange={onChange}
             />
         </div>
     );
 }
 
-function Slider({ defaultValue, startingValue, maxValue, isStepped, stepSize, leftIcon, rightIcon }) {
+function Slider({ defaultValue, startingValue, maxValue, isStepped, stepSize, leftIcon, rightIcon, value: controlledValue, onChange }) {
+    // internal state (for visuals); will sync with controlledValue if provided
     const [value, setValue] = useState(defaultValue);
     const sliderRef = useRef(null);
     const [region, setRegion] = useState('middle');
     const clientX = useMotionValue(0);
     const overflow = useMotionValue(0);
     const scale = useMotionValue(1);
+
+    // Sync incoming controlled value into internal state
+    useEffect(() => {
+        if (typeof controlledValue === 'number' && !Number.isNaN(controlledValue)) {
+            setValue(controlledValue);
+        }
+    }, [controlledValue]);
 
     useEffect(() => {
         setValue(defaultValue);
@@ -61,6 +75,14 @@ function Slider({ defaultValue, startingValue, maxValue, isStepped, stepSize, le
         }
     });
 
+    const setValueAndNotify = (newValue) => {
+        setValue(newValue);
+        if (typeof onChange === 'function') {
+            // notify parent (controlled)
+            onChange(newValue);
+        }
+    };
+
     const handlePointerMove = e => {
         if (e.buttons > 0 && sliderRef.current) {
             const { left, width } = sliderRef.current.getBoundingClientRect();
@@ -71,7 +93,7 @@ function Slider({ defaultValue, startingValue, maxValue, isStepped, stepSize, le
             }
 
             newValue = Math.min(Math.max(newValue, startingValue), maxValue);
-            setValue(newValue);
+            setValueAndNotify(newValue);
             clientX.jump(e.clientX);
         }
     };
