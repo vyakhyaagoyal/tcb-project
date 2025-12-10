@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-regular-svg-icons';
 import ElasticSlider from '@/components/ElasticSlider';
 import { createClient } from "@/lib/supabase/client";
+import { useRouter } from 'next/navigation';
 
 export default function CreateProfilePage() {
+    const router=useRouter();
     const supabase = createClient();
     const [imagePreview, setImagePreview] = useState(null); // preview URL shown to user
     const [name, setName] = useState("");
@@ -18,6 +20,7 @@ export default function CreateProfilePage() {
     const [error, setError] = useState(null);
     const [image, setImage] = useState(null);
     const [selected, setSelected] = useState(null);
+    const [userName, setUserName] = useState("");
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -41,6 +44,7 @@ export default function CreateProfilePage() {
             const profile = {
                 user_id: userId,
                 name: name || null,
+                user_name:userName,
                 genz_tag: tag || null,
                 bio: bio || null,
                 aura_points: aura ?? 0,
@@ -50,16 +54,17 @@ export default function CreateProfilePage() {
             };
 
             //upsert into profiles table
-            const {data:upserted,error:upsertError}=await supabase
-            .from('profiles')
-            .upsert(profile,{returning:'representation'});
+            const { data: upserted, error: upsertError } = await supabase
+                .from('profiles')
+                .upsert(profile, { returning: 'representation' });
 
-            if(upsertError){
+            if (upsertError) {
                 throw upsertError;
             }
             // console.log('Saving profile, aura state =', aura);
             setIsSaving(false);
             alert("profile saved");
+            router.push("/dashboard");
 
         }
         catch (err) {
@@ -101,6 +106,9 @@ export default function CreateProfilePage() {
                     <div className='m-6 w-[50vw] relative'>
                         <p className='m-2'>Name</p>
                         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter your name" className='border p-2 w-[90%] rounded-xl mb-6 ml-2'></input>
+
+                        <p className='m-2'>Username</p>
+                        <input type="text" value={userName} onChange={e => setUserName(e.target.value)} placeholder="Enter your Username" className='border p-2 w-[90%] rounded-xl mb-6 ml-2'></input>
 
                         <p className='m-2'>Gen-Z Tag</p>
                         <input type="text" value={tag} onChange={e => setTag(e.target.value)} placeholder="Give yourself a gen-z tag" className='border p-2 w-[90%] rounded-xl mb-6 ml-2'></input>
@@ -148,11 +156,14 @@ export default function CreateProfilePage() {
                     </div>
                 </div>
 
+                {/* //disable the button if nothing is changed by user
+                // //add a go back button */}
+
                 <button className="mx-auto px-5 py-3 bg-linear-to-r from-pink-600 to-purple-600 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition mb-5 hover:cursor-pointer"
                     onClick={clickSaveButton}
                     disabled={isSaving}
                 >
-                    {isSaving?"Saving...":"Save Profile"}
+                    {isSaving ? "Saving..." : "Save Profile"}
                 </button>
 
             </div>
