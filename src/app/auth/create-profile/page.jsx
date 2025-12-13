@@ -107,7 +107,7 @@ export default function CreateProfilePage() {
                         <p className='m-2'>Name</p>
                         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter your name" className='border p-2 w-[90%] rounded-xl mb-6 ml-2'></input>
 
-                        <p className='m-2'>Username</p>
+                        <p className='m-2 '>Username</p>
                         <input type="text" value={userName} onChange={e => setUserName(e.target.value)} placeholder="Enter your Username" className='border p-2 w-[90%] rounded-xl mb-6 ml-2'></input>
 
                         <p className='m-2'>Gen-Z Tag</p>
