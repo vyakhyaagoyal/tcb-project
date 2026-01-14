@@ -155,7 +155,6 @@ export default function CreateProfilePage() {
                         </div>
                     </div>
                 </div>
-
                 {/* //disable the button if nothing is changed by user
                 // //add a go back button */}
 
@@ -165,7 +164,6 @@ export default function CreateProfilePage() {
                 >
                     {isSaving ? "Saving..." : "Save Profile"}
                 </button>
-
             </div>
         </div>
     )
