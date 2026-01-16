@@ -28,7 +28,6 @@ export default function CreateProfilePage() {
         setImage(file);
         setImagePreview(URL.createObjectURL(file));
     }
-
     const clickSaveButton = async (e) => {
         e.preventDefault();
         setError(null);
