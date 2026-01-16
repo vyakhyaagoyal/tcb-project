@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 export default function CreateProfilePage() {
     const router=useRouter();
     const supabase = createClient();
-    const [imagePreview, setImagePreview] = useState(null); // preview URL shown to user
+    const [imagePreview, setImagePreview] = useState(null);
     const [name, setName] = useState("");
     const [tag, setTag] = useState("");
     const [bio, setBio] = useState("");
