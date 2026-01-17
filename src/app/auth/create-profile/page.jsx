@@ -136,6 +136,7 @@ export default function CreateProfilePage() {
                         <p className='mt-5 mb-3'>Forte? Pick your main character energy</p>
                         <div className='flex flex-wrap gap-3'>
                             {fortes.map((item, index) => {
+                                
                                 // pick a random rounded class
                                 const randomRounded = randomRoundedList[index];
                                 const randomRotate = rotateOptions[Math.floor(Math.random() * rotateOptions.length)];
