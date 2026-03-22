@@ -31,8 +31,14 @@ export default function CreateProfilePage() {
     const clickSaveButton = async (e) => {
         e.preventDefault();
         setError(null);
-        setIsSaving(true);
 
+        // Validation: ensure required inputs are filled
+        if (!name.trim() || !userName.trim() || !tag.trim() || !bio.trim()) {
+            alert('please fill the thing left!');
+            return;
+        }
+
+        setIsSaving(true);
         try {
             const { data: { user }, error: userErr } = await supabase.auth.getUser();
             if (userErr || !user) {
