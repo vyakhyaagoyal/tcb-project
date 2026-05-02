@@ -139,7 +139,7 @@ export default function CreateProfilePage() {
                             value={aura}
                         />
 
-                        <p className='mt-5 mb-3'>Forte? Pick your main character energy</p>
+                        <p className='mt-5 mb-3'>Forte? Pick your main character energyy!</p>
                         <div className='flex flex-wrap gap-3'>
                             {fortes.map((item, index) => {
                                 
