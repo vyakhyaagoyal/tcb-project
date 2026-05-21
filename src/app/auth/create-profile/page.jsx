@@ -101,7 +101,7 @@ export default function CreateProfilePage() {
                         <FontAwesomeIcon icon={faCamera} className='text-2xl hover:text-gray-800' />
                     )}</label>
                 <input id="profileImage" type="file" accept="image/*" className='hidden' onChange={handleImageChange} />
-                <label className='m-2'>Add a profile image</label>
+                <label className='m-2'>Add profile image</label>
             </div>
 
             <div className="flex flex-col">
